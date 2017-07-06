@@ -143,7 +143,10 @@ function getPhotos (accessToken, options, callback) {
 
   options = options || {}
 
-  if (options.maxResults) accessTokenParams['max-results'] = options.maxResults
+  if (options.maxResults) accessTokenParams['max-results'] = options.maxResults;
+  if (options.imgMax) accessTokenParams['imgmax'] = options.imgMax;
+  if (options.thumbsize) accessTokenParams['thumbsize'] = options.thumbsize;
+  if (options.startIndex) accessTokenParams['start-index'] = options.startindex;
 
   const albumPart = options.albumId ? `/albumid/${options.albumId}` : ''
 
@@ -163,7 +166,7 @@ function getPhotos (accessToken, options, callback) {
       entry => parseEntry(entry, photoSchema)
     )
 
-    callback(null, photos)
+    callback(null, photos, body.feed)
   })
 }
 
